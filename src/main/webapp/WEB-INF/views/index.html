@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"> <!-- External CSS -->
+</head>
+<body class="bg-gray-100 p-6">
+<div class="container mx-auto">
+    <h1 class="text-2xl font-bold mb-6 text-center">Product List</h1>
+    <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+        <table class="min-w-full">
+            <thead class="bg-gray-800 text-white">
+            <tr>
+                <th class="py-3 px-4 text-left">#</th>
+                <th class="py-3 px-4 text-left">Image</th>
+                <th class="py-3 px-4 text-left">Name</th>
+                <th class="py-3 px-4 text-left">Price</th>
+                <th class="py-3 px-4 text-left">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="border-b hover:bg-gray-50" th:each="product : ${products}">
+                <td class="py-3 px-4" th:text="${product.id}"></td>
+                <td class="py-3 px-4">
+                    <img th:src="${product.imageUrl}" alt="Product Image" class="w-12 h-12 object-cover rounded-lg">
+                </td>
+                <td class="py-3 px-4" th:text="${product.name}"></td>
+                <td class="py-3 px-4" th:text="${'$' + product.price}"></td>
+                <td class="py-3 px-4 space-x-2">
+                    <a th:href="@{/products/{id}(id=${product.id})}"
+                       class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">
+                        <i class="fas fa-eye"></i> View Details
+                    </a>
+                    <a th:href="@{/products/edit/{id}(id=${product.id})}"
+                       class="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600">
+                        <i class="fas fa-edit"></i> Update
+                    </a>
+                    <a th:href="@{/products/delete/{id}(id=${product.id})}"
+                       class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600">
+                        <i class="fas fa-trash"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-6 text-center">
+        <a th:href="@{/add-product}" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+            <button>
+                <i class="fas fa-plus"></i> Add New Product
+            </button>
+        </a>
+    </div>
+</div>
+</body>
+</html>

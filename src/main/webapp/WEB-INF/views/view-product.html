@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Product Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"> <!-- External CSS -->
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<div class="container bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-6 text-center">View Product Details</h1>
+    <form th:object="${product}">
+        <!-- Product Image -->
+        <div class="mb-4 flex justify-center">
+            <img th:src="${product.imageUrl}" alt="Product Image" class="w-32 h-32 object-cover rounded-lg">
+        </div>
+
+        <!-- Product Name -->
+        <div class="mb-4">
+            <label for="productName" class="block text-sm font-medium text-gray-700">Product Name</label>
+            <input type="text" id="productName" th:field="*{name}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100" readonly>
+        </div>
+
+        <!-- Expiration Date -->
+        <div class="mb-4">
+            <label for="expirationDate" class="block text-sm font-medium text-gray-700">Expiration Date</label>
+            <input type="date" id="expirationDate" th:field="*{expirationDate}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100" readonly>
+        </div>
+
+        <!-- Manufacturer -->
+        <div class="mb-4">
+            <label for="manufacturer" class="block text-sm font-medium text-gray-700">Manufacturer</label>
+            <input type="text" id="manufacturer" th:field="*{manufacturer}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100" readonly>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-4">
+            <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+            <input type="number" id="price" th:field="*{price}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100" readonly>
+        </div>
+
+        <!-- Availability -->
+        <div class="mb-6">
+            <label for="availability" class="block text-sm font-medium text-gray-700">Availability</label>
+            <input type="text" id="availability" th:value="${product.availability ? 'Available' : 'Out of Stock'}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100" readonly>
+        </div>
+
+        <!-- Back Button -->
+        <div>
+            <a th:href="@{/products}" class="w-full bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 text-center block">
+                <i class="fas fa-arrow-left"></i> Back to Product List
+            </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
